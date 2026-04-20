@@ -1,36 +1,200 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exclusive Offer - Limited Time</title>
-  <style>
-    body {font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4;}
-    .container {max-width: 900px; margin:auto; background:#fff; padding:20px;}
-    .header {text-align:center; padding:20px;}
-    .header h1 {color:#2c3e50;}
-    .offer {background:#27ae60; color:#fff; padding:15px; text-align:center; font-size:20px; margin:20px 0;}
-    .content {font-size:18px; line-height:1.6; color:#333;}
-    .btn {display:block; width:100%; text-align:center; background:#e74c3c; color:#fff; padding:15px; text-decoration:none; font-size:20px; margin:20px 0; border-radius:5px;}
-    .btn:hover {background:#c0392b;}
-    .footer {text-align:center; font-size:14px; color:#777; margin-top:20px;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exclusive Reward Access</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1d2671, #c33764);
+  color: white;
+  text-align: center;
+  height: 100vh;
+  overflow: hidden; /* ❗ No scroll */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.highlight {
+  color: #ffd700;
+}
+
+.card {
+  background: white;
+  color: black;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+/* MAIN BUTTON */
+.main-btn {
+  background: #ff3b3b;
+  color: white;
+  border: none;
+  padding: 5px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+}
+
+/* PREMIUM GLOW BUTTON */
+.glow-btn {
+  margin-top: 15px;
+  padding: 15px;
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(270deg, #ff00cc, #3333ff, #00ffcc);
+  background-size: 600% 600%;
+  animation: gradientMove 5s ease infinite, glow 2s infinite alternate;
+}
+
+/* ANIMATIONS */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% }
+  50% { background-position: 100% }
+  100% { background-position: 0% }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px #fff, 0 0 20px #ff00cc;
+  }
+  to {
+    box-shadow: 0 0 20px #00ffcc, 0 0 40px #3333ff;
+  }
+}
+
+.timer {
+  color: red;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.fake-users {
+  margin-top: 8px;
+  font-size: 13px;
+  color: green;
+}
+
+.steps {
+  text-align: left;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.footer {
+  margin-top: 10px;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+</style>
 </head>
-<body><div class="container">  <div class="header">
-    <h1>🔥 Limited Time Offer 🔥</h1>
-    <p>Complete a simple task & unlock your reward!</p>
-  </div>  <div class="offer">
-    🎁 Get Instant Access Now!
-  </div>  <div class="content">
-    <p>We are giving away an exclusive reward to a limited number of users.</p>
-    <p>To qualify, simply complete a short offer. It takes less than 2 minutes!</p><ul>
-  <li>✔ 100% Free</li>
-  <li>✔ Fast & Easy Process</li>
-  <li>✔ Instant Access</li>
-</ul>
 
-  </div><a href="#" class="btn">👉 Unlock Now</a>
+<body>
 
-  <div class="footer">
-    <p>No spam. No hidden charges. Terms & conditions apply.</p>
-  </div></div></body>
+<div class="container">
+<h1>🎁 Unlock Your <span class="highlight">Exclusive Reward</span></h1>
+<p>Only available for a limited number of users</p>
+
+
+<div class="card">
+  <h3><b>🔥 Reward Access</b></h3>
+
+  <div class="timer" id="timer">⏳Time left 01:30</div>
+
+  <button class="main-btn" onclick="goOffer()"><b><font size="5px">👉 Continue to Unlock</font></b></button>
+
+  <div class="fake-users" id="users">✔ 27 people are claiming now</div>
+</div>
+
+<div class="card">
+  <div class="steps">
+  <center><b><h2>How it works:</h2></b></center>
+  <b>
+    1️⃣ Click the button above<br>
+    2️⃣ Complete a quick step<br>
+    3️⃣ Unlock your reward
+    </b>
+  </div>
+</div>
+
+<div class="card">
+  <button class="glow-btn" onclick="goAllRewards()">✨ Get All Rewards</button>
+</div>
+
+<div class="footer">
+  Not affiliated with any brand
+</div>
+
+</div>
+
+<script>
+
+// MAIN LINK
+function goOffer() {
+  window.location.href = "https://www.offervault.com/?selectedTab=topOffers&search=&page=1";
+}
+
+// SECOND BUTTON LINK
+function goAllRewards() {
+  window.location.href = "EnterPage.html";
+}
+
+// TIMER
+let time = 90;
+let timer = document.getElementById("timer");
+
+setInterval(() => {
+  let m = Math.floor(time / 60);
+  let s = time % 60;
+  timer.innerHTML = `⏳ Time Left ${m}:${s < 10 ? '0' : ''}${s}`;
+  time--;
+}, 1000);
+
+// FAKE USERS
+let users = document.getElementById("users");
+
+setInterval(() => {
+  let num = Math.floor(Math.random() * 50) + 20;
+  users.innerHTML = `✔ ${num} people are claiming now`;
+}, 3000);
+
+</script>
+
+</body>
 </html>
