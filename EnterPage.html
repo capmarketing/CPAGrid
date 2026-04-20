@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Rewards Hub</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+
+body{
+    background:#f4f6fb;
+    padding-top:60px;
+    padding-bottom:60px;
+}
+
+/* HEADER */
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:#111;
+    color:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 15px;
+    z-index:1000;
+}
+
+.menu-icon,.about-icon{
+    font-size:22px;
+    cursor:pointer;
+}
+
+.title{
+    font-size:16px;
+}
+
+/* SIDE MENU */
+.side-menu{
+    position:fixed;
+    left:-250px;
+    top:0;
+    width:250px;
+    height:100%;
+    background:#222;
+    color:#fff;
+    padding:20px;
+    transition:0.3s;
+    z-index:2000;
+}
+
+.side-menu a{
+    display:block;
+    color:#fff;
+    padding:10px 0;
+    text-decoration:none;
+}
+
+.close-btn{
+    text-align:right;
+    font-size:20px;
+    cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:#111;
+    color:#fff;
+    text-align:center;
+    padding:12px;
+}
+
+/* MARQUEE */
+.marquee{
+    background:#ff5722;
+    color:#fff;
+    padding:8px;
+}
+
+/* BANNER */
+.banner{
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    color:#fff;
+    text-align:center;
+    padding:25px;
+}
+
+.timer{
+    font-size:22px;
+    margin-top:10px;
+}
+
+/* VIDEO */
+.video{
+    padding:15px;
+    text-align:center;
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    padding:15px;
+}
+
+.card{
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:10px;
+    text-align:center;
+}
+
+.title-card{
+    font-size:14px;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.btn{
+    background:#ff3d00;
+    color:#fff;
+    border:none;
+    padding:8px;
+    width:100%;
+    border-radius:5px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+/* POPUP */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    display:none;
+    z-index:1500;
+}
+
+.modal{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    display:none;
+    width:280px;
+    z-index:2000;
+    text-align:center;
+}
+
+.modal img{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+.modal-buttons{
+    display:flex;
+    justify-content:space-between;
+}
+
+.cancel,.get{
+    width:48%;
+    padding:8px;
+    border:none;
+}
+
+.cancel{background:#ccc;}
+.get{background:#28a745;color:#fff;}
+
+/* ABOUT MODAL */
+.about-modal{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    width:280px;
+    text-align:center;
+    display:none;
+    z-index:3000;
+}
+
+.about-modal img{
+    width:80px;
+    border-radius:50%;
+}
+
+.close-about{
+    position:absolute;
+    top:10px;
+    right:10px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+<div class="menu-icon" onclick="openMenu()">☰</div>
+<div class="title">🎁 Rewards Center</div>
+<div class="about-icon" onclick="openAbout()">ℹ️</div>
+</header>
+
+<!-- SIDE MENU -->
+<div class="side-menu" id="sideMenu">
+<div class="close-btn" onclick="closeMenu()">✖</div>
+<a href="#">Home</a>
+<a href="#">Top Offers</a>
+<a href="#">New Offers</a>
+<a href="#">Daily Rewards</a>
+<a href="#">Contact</a>
+</div>
+
+<!-- ABOUT -->
+<div class="overlay" id="aboutOverlay"></div>
+<div class="about-modal" id="aboutModal">
+<span class="close-about" onclick="closeAbout()">✖</span>
+<img src="https://via.placeholder.com/100">
+<h3>Your Name</h3>
+<p>This is a rewards platform where users complete offers and earn rewards.</p>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee">
+<marquee>🔥 Hot Offers | Earn Rewards | Install Apps | Complete Survey</marquee>
+</div>
+
+<!-- BANNER -->
+<div class="banner">
+<h2>Unlock Premium Rewards</h2>
+<p>Choose any offer below</p>
+<div class="timer" id="timer">05:00</div>
+</div>
+
+<!-- VIDEO -->
+<div class="video">
+<h3>How It Works</h3>
+<video width="95%" controls>
+<source src="your-video.mp4">
+</video>
+</div>
+
+<!-- GRID -->
+<div class="grid" id="grid"></div>
+
+<footer>© 2026 Rewards Platform</footer>
+
+<!-- POPUP -->
+<div class="overlay" id="overlay"></div>
+
+<div class="modal" id="modal">
+<img id="mImg">
+<p id="mText"></p>
+<div class="modal-buttons">
+<button class="cancel" onclick="closePopup()">Cancel</button>
+<button class="get" onclick="goOffer()">Get Offer</button>
+</div>
+</div>
+
+<script>
+
+// TIMER
+let t=300;
+setInterval(()=>{
+let m=Math.floor(t/60);
+let s=t%60;
+document.getElementById("timer").innerHTML=
+(m<10?"0":"")+m+":"+(s<10?"0":"")+s;
+t--;
+},1000);
+
+// 🔥 AUTO 30+ OFFERS SYSTEM
+const offers=[];
+for(let i=1;i<=30;i++){
+    offers.push({
+        title:"Premium Offer "+i,
+        link:"YOUR_LINK_"+i,
+        img:"https://via.placeholder.com/300x200?text=Offer+"+i
+    });
+}
+
+// LOAD GRID
+const grid=document.getElementById("grid");
+
+offers.forEach((o,i)=>{
+let div=document.createElement("div");
+div.className="card";
+
+div.innerHTML=`
+<img src="${o.img}">
+<div class="card-body">
+<div class="title-card">${o.title}</div>
+<button class="btn" onclick="showPopup(${i})">Get Offer</button>
+</div>`;
+
+grid.appendChild(div);
+});
+
+// POPUP
+let current="";
+function showPopup(i){
+let o=offers[i];
+current=o.link;
+mImg.src=o.img;
+mText.innerText=o.title;
+modal.style.display="block";
+overlay.style.display="block";
+}
+
+function closePopup(){
+modal.style.display="none";
+overlay.style.display="none";
+}
+
+function goOffer(){
+window.location.href=current;
+}
+
+// MENU
+function openMenu(){sideMenu.style.left="0";}
+function closeMenu(){sideMenu.style.left="-250px";}
+
+// ABOUT
+function openAbout(){
+aboutModal.style.display="block";
+aboutOverlay.style.display="block";
+}
+function closeAbout(){
+aboutModal.style.display="none";
+aboutOverlay.style.display="none";
+}
+
+// AUTO POPUP
+setInterval(()=>{
+let i=Math.floor(Math.random()*offers.length);
+showPopup(i);
+},9000);
+
+</script>
+
+</body>
+</html>
